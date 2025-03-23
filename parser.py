@@ -45,7 +45,7 @@ def transform_values(data: dict) -> dict:
 
 
 def save_as_json(data: list[dict], output_file: str) -> None:
-    with open(output_file, "w") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False)
 
 
@@ -78,7 +78,7 @@ def main() -> int:
         return 1
 
     print(f"Parsing {source_file!r}.")
-    root = ET.parse(source_file).getroot()
+    root = ET.parse(source_file, parser=ET.XMLParser(encoding='utf-8')).getroot()
 
     parsed_data = []
     for element in root:
